@@ -74,6 +74,11 @@ const props = {
     type: String,
     default: 'name'
   },
+  /** code */
+  codeKey: {
+    type: String,
+    default: 'code'
+  },
   valueKey: {
     type: String,
     default: 'value'
@@ -186,7 +191,7 @@ export default {
     },
     renderChart () {
       this.setFontSizeScale()
-      const { spiral, wordPadding, fontSizeScale, font, words, nameKey, valueKey } = this
+      const { spiral, wordPadding, fontSizeScale, font, words, nameKey, codeKey, valueKey } = this
       const { width, height } = this.size
       const { a, b, c } = this.getRotation()
       const layout = cloud()
@@ -203,7 +208,7 @@ export default {
       layout.start()
     },
     draw (data) {
-      const { layout, chart, color, nameKey, valueKey, showTooltip, wordClick } = this
+      const { layout, chart, color, nameKey, codeKey, valueKey, showTooltip, wordClick } = this
       const fill = this.getColorScale(color)
       const vm = this
       const centeredChart = chart.append('g')
@@ -243,7 +248,8 @@ export default {
         });
       }
       text.on('click', (d) => {
-        wordClick(d[nameKey], d[valueKey], vm)
+        /** 添加返回 code */
+        wordClick(d[nameKey], d[codeKey], d[valueKey], vm)
       })
     },
     update () {
