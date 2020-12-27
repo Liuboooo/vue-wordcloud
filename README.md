@@ -4,6 +4,10 @@ A Vue.js Word Cloud component based on the original [d3-cloud](https://github.co
 
 **What's New?**
 
+V1.1 Dec 27 2020:
+
+- Feature add `codeKey` for word (The `codeKey` will be used as a primary key value for subsequent business logic)(By Vincent)
+
 V1.1 Nov 25, 2018:
 
 - Fix #6 add `showTooltip` option
@@ -65,8 +69,11 @@ export default {
     wordcloud
   },
   methods: {
-    wordClickHandler(name, value, vm) {
-      console.log('wordClickHandler', name, value, vm);
+    // wordClickHandler(name, value, vm) {
+    //  console.log('wordClickHandler', name, value, vm);
+    // }
+    wordClickHandler(name, code, value, vm) {
+      console.log('wordClickHandler', name, code, value, vm);
     }
   },
   data() {
@@ -74,38 +81,47 @@ export default {
       myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
       defaultWords: [{
           "name": "Cat",
+          "code": "abc001",
           "value": 26
         },
         {
           "name": "fish",
+          "code": "abc002",
           "value": 19
         },
         {
           "name": "things",
+          "code": "abc003",
           "value": 18
         },
         {
           "name": "look",
+          "code": "abc004",
           "value": 16
         },
         {
           "name": "two",
+          "code": "abc005",
           "value": 15
         },
         {
           "name": "fun",
+          "code": "abc006",
           "value": 9
         },
         {
           "name": "know",
+          "code": "abc007",
           "value": 9
         },
         {
           "name": "good",
+          "code": "abc008",
           "value": 9
         },
         {
           "name": "play",
+          "code": "abc009",
           "value": 6
         }
       ]
@@ -122,6 +138,7 @@ For using [D3 categorical color schemes](https://github.com/d3/d3-scale-chromati
       <wordcloud
       :data="defaultWords"
       nameKey="name"
+      codeKey="code"
       valueKey="value"
       color="Accent">
       </wordcloud>
@@ -134,6 +151,7 @@ For using [D3 categorical color schemes](https://github.com/d3/d3-scale-chromati
 :-----:|:-----:|:-----:|:-----:
 data|词云文本数据|defaultWords|数据格式：数组。数组中每个元素是对象{ 词：数值 }
 nameKey|数据中表示要显示的词的字段名称|'name'|-
+codeKey|单词的 code, 用于后续业务逻辑|'code'|-
 valueKey|数据中表示词的权重的字段名称|'value'|-
 margin|图表外边矩|{top: 15, right: 15, bottom: 15, left: 15 }|-
 wordPadding|词间间距|3|-
@@ -144,7 +162,7 @@ fontSize|词的字号范围| `[10, 80]`| [minSize, maxSize]
 font|词的字体名称，对应 `font-family` 的值 |"impact"|例如，衬线字体'serif'，非衬线字体'Arial'
 color|配色集合，可配置两种类型的值：String (D3 scheme name)，或 Array（自定义的颜色列表）|'Category10'|可采用D3内置的任意 Category 配色，或自定义的颜色列表；单色可通过传入只有一个颜色的数组实现，详见 [examples](https://github.com/feifang/vue-wordcloud#examples)
 showTooltip|显示 Tooltip|true| true/false; tooltip 的样式（如宽高、颜色等）可以通过 CSS 类 `div.tooltip` 配置
-wordClick|词的点击事件的回调函数|null|函数传入三个变量，第一个是点击的词 `text`，第二个是该词对应的权重 `value`，第三个是 Vue 实例 `vm`
+wordClick|词的点击事件的回调函数|null|函数传入四个变量，第一个是点击的词 `text`，第二个是点击的词的编号 `code`，第三个是该词对应的权重 `value`，第四个是 Vue 实例 `vm`
 
 
 
