@@ -22,13 +22,16 @@ For details please refer to [options](https://github.com/feifang/vue-wordcloud#o
 
 ### Install
 ```
-npm install vue-wordcloud
+# npm install vue-wordcloud
+
+# 本地引入依赖
+npm install file:{项目的相对路径}
 
 ```
 
 ### Import
 ```
-import wordcloud from 'vue-wordcloud'
+import wordcloud from 'vue-wordcloud-code'
 ```
 
 ### Examples
